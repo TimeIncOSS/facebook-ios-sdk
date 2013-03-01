@@ -83,7 +83,7 @@ static NSMutableCharacterSet *kEscapeChars;
         
 
     [self clearErrorTrace];
-    [self addErrorWithCode:EFRAGMENT description:@"Not valid type for JSON"];
+    [self addErrorWithCode:FB_EFRAGMENT description:@"Not valid type for JSON"];
     return nil;
 }
 
@@ -117,7 +117,7 @@ static NSMutableCharacterSet *kEscapeChars;
         [self appendValue:[fragment proxyForJson] into:json];
         
     } else {
-        [self addErrorWithCode:EUNSUPPORTED description:[NSString stringWithFormat:@"JSON serialisation not supported for %@", [fragment class]]];
+        [self addErrorWithCode:FB_EUNSUPPORTED description:[NSString stringWithFormat:@"JSON serialisation not supported for %@", [fragment class]]];
         return NO;
     }
     return YES;
@@ -125,7 +125,7 @@ static NSMutableCharacterSet *kEscapeChars;
 
 - (BOOL)appendArray:(NSArray*)fragment into:(NSMutableString*)json {
     if (maxDepth && ++depth > maxDepth) {
-        [self addErrorWithCode:EDEPTH description: @"Nested too deep"];
+        [self addErrorWithCode:FB_EDEPTH description:@"Nested too deep"];
         return NO;
     }
     [json appendString:@"["];
@@ -154,7 +154,7 @@ static NSMutableCharacterSet *kEscapeChars;
 
 - (BOOL)appendDictionary:(NSDictionary*)fragment into:(NSMutableString*)json {
     if (maxDepth && ++depth > maxDepth) {
-        [self addErrorWithCode:EDEPTH description: @"Nested too deep"];
+        [self addErrorWithCode:FB_EDEPTH description:@"Nested too deep"];
         return NO;
     }
     [json appendString:@"{"];
@@ -175,7 +175,7 @@ static NSMutableCharacterSet *kEscapeChars;
             [json appendString:[self indent]];
         
         if (![value isKindOfClass:[NSString class]]) {
-            [self addErrorWithCode:EUNSUPPORTED description: @"JSON object key must be string"];
+            [self addErrorWithCode:FB_EUNSUPPORTED description:@"JSON object key must be string"];
             return NO;
         }
         
@@ -184,7 +184,7 @@ static NSMutableCharacterSet *kEscapeChars;
         
         [json appendString:colon];
         if (![self appendValue:[fragment objectForKey:value] into:json]) {
-            [self addErrorWithCode:EUNSUPPORTED description:[NSString stringWithFormat:@"Unsupported value for key %@ in object", value]];
+            [self addErrorWithCode:FB_EUNSUPPORTED description:[NSString stringWithFormat:@"Unsupported value for key %@ in object", value]];
             return NO;
         }
     }

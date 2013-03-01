@@ -33,18 +33,18 @@ extern NSString *FBSBJSONErrorDomain;
 
 
 enum {
-    EUNSUPPORTED = 1,
-    EPARSENUM,
-    EPARSE,
-    EFRAGMENT,
-    ECTRL,
-    EUNICODE,
-    EDEPTH,
-    EESCAPE,
-    ETRAILCOMMA,
-    ETRAILGARBAGE,
-    EEOF,
-    EINPUT
+    FB_EUNSUPPORTED = 1,
+    FB_EPARSENUM,
+    FB_EPARSE,
+    FB_EFRAGMENT,
+    FB_ECTRL,
+    FB_EUNICODE,
+    FB_EDEPTH,
+    FB_EESCAPE,
+    FB_ETRAILCOMMA,
+    FB_ETRAILGARBAGE,
+    FB_EEOF,
+    FB_EINPUT
 };
 
 /**
